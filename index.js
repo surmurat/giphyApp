@@ -12,7 +12,7 @@ function search(query) {
 
     query = query.replace(' ', '+');
     $.ajax({
-        url: 'http://api.giphy.com/v1/gifs/search?api_key=' + apiKey + '&q=' + query + '&limit=10&rating=g&lang=en',
+        url: 'https://api.giphy.com/v1/gifs/search?api_key=' + apiKey + '&q=' + query + '&limit=10&rating=g&lang=en',
 
     }).done(function (data) {
 
