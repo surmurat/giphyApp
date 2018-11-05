@@ -41,17 +41,36 @@ function search(query) {
 }
 
 $(document).ready(function () {
-
+    var storeDAta = localStorage.getItem('topik');
+    if(storeDAta){
+        topics = storeDAta.split(',');
+    }
     searchButton.click(function () {
         search(searchQuery.val());
+        if(topics.indexOf(searchQuery.val()) > -1){
+            return;
+        }
+        topics.push(searchQuery.val());
+         createPills();
+         localStorage.setItem('topik',topics);
+
     });
 
-    $(document).on("submit", "form", function(e){
+    $(document).on("submit", "form", function (e) {
         e.preventDefault();
         searchButton.click();
         return false;
     });
 
+
+
+    createPills();
+
+
+});
+
+function createPills() {
+    pillArea.html("");
     for (var i = 0; i < topics.length; i++) {
         var pill = $('<span></span>');
         pill.addClass('badge badge-pill badge-primary mr-2 text-uppercase p-2');
@@ -61,6 +80,4 @@ $(document).ready(function () {
         });
         pillArea.append(pill);
     }
-
-
-});
+}
